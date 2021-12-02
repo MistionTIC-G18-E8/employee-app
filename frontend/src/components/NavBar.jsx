@@ -4,14 +4,14 @@ import { LinkContainer } from "react-router-bootstrap";
 export default function NavBar() {
   return (
     <>
-      <Navbar collapseOnSelect expand="true" bg="primary" variant="dark">
+      <Navbar collapseOnSelect expand="false" bg="primary" variant="dark">
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand>Facebook Payroll App</Navbar.Brand>
+            <Navbar.Brand><strong>Facebook</strong> Payroll App</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="ms-auto fw-bold">
+            <Nav className="ms-auto">
 
             
               <LinkContainer to="/login">
