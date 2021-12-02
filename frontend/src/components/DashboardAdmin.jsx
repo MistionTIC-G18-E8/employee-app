@@ -3,7 +3,7 @@ import React from 'react'
 const DashboardAdmin = () => {
     return (
         <div>
-            <NavBar/>
+        <h1> Admin Dashboard</h1>
         </div>
     )
 }

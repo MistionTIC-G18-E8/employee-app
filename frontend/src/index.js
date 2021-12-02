@@ -1,20 +1,13 @@
 import { render } from "react-dom";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 
 import App from "./App";
-import Login from "./routes/login";
-import Register from "./routes/register";
 
 const rootElement = document.getElementById("root");
 render(
   <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />}>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Route>
-    </Routes>
+    <App />
   </BrowserRouter>,
   rootElement
 );
