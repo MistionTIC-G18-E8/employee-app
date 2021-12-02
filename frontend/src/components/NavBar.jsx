@@ -4,20 +4,38 @@ import { LinkContainer } from "react-router-bootstrap";
 export default function NavBar() {
   return (
     <>
-      <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
+      <Navbar collapseOnSelect expand="false" bg="primary" variant="dark">
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand>Facebook Payroll App</Navbar.Brand>
+            <Navbar.Brand><strong>Facebook</strong> Payroll App</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="ms-auto fw-bold">
+            <Nav className="ms-auto">
+
+            
               <LinkContainer to="/login">
                 <Nav.Link>Login</Nav.Link>
               </LinkContainer>
-              {/* <LinkContainer to="/register">
-                <Nav.Link>Register</Nav.Link>
-              </LinkContainer> */}
+              <LinkContainer to="/editarperfil">
+                <Nav.Link>Editar Perfil</Nav.Link>
+              </LinkContainer>    
+              <LinkContainer to="/descargarreportedepago">
+                <Nav.Link>Descargar Reporte de Pago</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/solicitarpermisos">
+                <Nav.Link>Solicitar Permisos</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/solicitarvacaciones">
+                <Nav.Link>Solicitar Vacaciones</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/dashboardnomina">
+                <Nav.Link>Dashboard Nomina</Nav.Link>
+              </LinkContainer>
+
+              <LinkContainer to="/dashboardadmin">
+                <Nav.Link>Dashboard Admin</Nav.Link>
+              </LinkContainer>
             </Nav>
           </Navbar.Collapse>
         </Container>
