@@ -3,7 +3,7 @@ import React from 'react'
 const DescargarReporteDePago = () => {
     return (
         <div>
-           <NavBar/> 
+        <h1>Descargar Reporte de Pago</h1>
         </div>
     )
 }

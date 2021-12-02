@@ -3,7 +3,7 @@ import React from 'react'
 const EditarPerfil = () => {
     return (
         <div>
-            <NavBar/>
+        <h1>Editar Perfil</h1>
         </div>
     )
 }

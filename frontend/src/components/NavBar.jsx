@@ -15,9 +15,25 @@ export default function NavBar() {
               <LinkContainer to="/login">
                 <Nav.Link>Login</Nav.Link>
               </LinkContainer>
-              {/* <LinkContainer to="/register">
-                <Nav.Link>Register</Nav.Link>
-              </LinkContainer> */}
+              <LinkContainer to="/editarperfil">
+                <Nav.Link>Editar Perfil</Nav.Link>
+              </LinkContainer>    
+              <LinkContainer to="/descargarreportedepago">
+                <Nav.Link>Descargar Reporte de Pago</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/solicitarpermisos">
+                <Nav.Link>Solicitar Permisos</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/solicitarvacaciones">
+                <Nav.Link>Solicitar Vacaciones</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/dashboardnomina">
+                <Nav.Link>Dashboard Nomina</Nav.Link>
+              </LinkContainer>
+
+              <LinkContainer to="/dashboardadmin">
+                <Nav.Link>Dashboard Admin</Nav.Link>
+              </LinkContainer>
             </Nav>
           </Navbar.Collapse>
         </Container>

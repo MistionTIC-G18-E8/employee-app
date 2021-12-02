@@ -3,7 +3,7 @@ import React from 'react'
 const DashboardNomina = () => {
     return (
         <div>
-            <NavBar/>
+        <h1>Dashboard Nómina</h1>
         </div>
     )
 }
