@@ -1,10 +1,37 @@
 import React from 'react'
+import { Form, Button, Container, Col, Row } from "react-bootstrap";
 
 const SolicitarPermisos = () => {
     return (
-        <div>
-        <h1>Solicitar Permisos</h1>
-        </div>
+        <Container>
+            <Row className="m-4 justify-content-center display-6">
+                Solicitar Permisos
+            </Row>
+            <Row className="justify-content-center">
+                <Col xs="auto" lg="4">
+                    <Form>
+                        <Form.Group className="mb-3" controlId="SP.fechaInicio">
+                            <Form.Label >Seleccione fecha de inicio</Form.Label>
+                            <Form.Control type="date" name="fechaInicio" required/>
+                        </Form.Group>
+
+                        <Form.Group className="mb-3" controlId="SP.fechaFin">
+                            <Form.Label >Seleccione fecha final</Form.Label>
+                            <Form.Control type="date" name="fechaFin" required/>
+                        </Form.Group>
+                        
+                        <Form.Group className="mb-3" controlId="SP.motivo">
+                            <Form.Label>Motivo del permiso</Form.Label>
+                            <Form.Control as="textarea" rows={3} required />
+                        </Form.Group>
+                        
+                        <div className="d-grid gap-2">
+                        <Button variant="primary" type="submit" size="lg">Enviar Solicitud</Button>
+                        </div>
+                    </Form>
+                </Col>
+            </Row>
+        </Container>
     )
 }
 
