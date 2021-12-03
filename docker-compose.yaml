@@ -1,0 +1,57 @@
+version: "3.2"
+services:
+  api:
+    build:
+      context: "./backend"
+      dockerfile: "Dockerfile"
+    # env_file: ".env"
+    image: "eapp-api:1.0"
+    container_name: api
+    restart: unless-stopped
+    environment:
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DEBUG=${DEBUG}
+    ports:
+      - 8080:8080
+    networks:
+      - web
+    volumes:
+      - ./backend/:/usr/src/app
+    stop_signal: SIGTERM
+
+  mongo-express:
+    container_name: dbmanager
+    image: docker.io/mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=${DB_USER}
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=${DB_PASSWORD}
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+    networks:
+      - db
+
+  mongodb:
+    image : docker.io/mongo:5-focal
+    container_name: mongo
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - MONGO_INITDB_ROOT_USERNAME=${DB_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - db-data:/data/db
+    ports:
+      - 27017:27017
+    networks:
+      - db
+      - web
+    restart: unless-stopped
+volumes:
+  # app-data:
+  db-data:
+networks:
+  web:
+  db:
