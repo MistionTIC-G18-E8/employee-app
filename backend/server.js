@@ -46,6 +46,10 @@ app.get("/", (req, res) => {
 
 // Register the routes for 'employee' model /api/employee
 require("./routes/employee")(app);
+require("./routes/user")(app);
+require("./routes/contract")(app);
+require("./routes/payslip")(app);
+require("./routes/employee_request")(app);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);

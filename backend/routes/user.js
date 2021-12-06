@@ -1,25 +1,25 @@
 module.exports = app => {
 
-  const controller = require("../controllers/employee");
+  const controller = require("../controllers/user");
   var router = require("express").Router();
 
-  // Create a new employee
+  // Create a new user
   router.post("/", controller.create);
 
-  // Retrieve all Employees
+  // Retrieve all users
   router.get("/", controller.findAll);
 
-  // Retrieve a single employee with id
+  // Retrieve a single user with id
   router.get("/:id", controller.findOne);
 
-  // Update a employee with id
+  // Update a user with id
   router.put("/:id", controller.update);
 
-  // Delete a employee with id
+  // Delete a user with id
   router.delete("/:id", controller.delete);
 
-  // Delete all employee
+  // Delete all user
   router.delete("/", controller.deleteAll);
 
-  app.use("/api/employee", router);
+  app.use("/api/user", router);
 };

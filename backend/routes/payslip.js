@@ -1,25 +1,25 @@
 module.exports = app => {
 
-  const controller = require("../controllers/employee");
+  const controller = require("../controllers/payslip");
   var router = require("express").Router();
 
-  // Create a new employee
+  // Create a new payslip
   router.post("/", controller.create);
 
-  // Retrieve all Employees
+  // Retrieve all payslips
   router.get("/", controller.findAll);
 
-  // Retrieve a single employee with id
+  // Retrieve a single payslip with id
   router.get("/:id", controller.findOne);
 
-  // Update a employee with id
+  // Update a payslip with id
   router.put("/:id", controller.update);
 
-  // Delete a employee with id
+  // Delete a payslip with id
   router.delete("/:id", controller.delete);
 
-  // Delete all employee
+  // Delete all payslip
   router.delete("/", controller.deleteAll);
 
-  app.use("/api/employee", router);
+  app.use("/api/payslip", router);
 };
