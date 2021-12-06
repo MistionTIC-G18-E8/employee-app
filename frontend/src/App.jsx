@@ -9,6 +9,8 @@ import DescargarReporteDePago from "./routes/DescargarReporteDePago"
 import EditarPerfil from "./routes/EditarPerfil"
 import SolicitarPermisos from "./routes/SolicitarPermisos"
 import SolicitarVacaciones from "./routes/SolicitarVacaciones"
+import Vacaciones from "./routes/Vacaciones"
+import Permisos from "./routes/Permisos"
 
 
 
@@ -25,6 +27,8 @@ export default function App() {
         <Route path="editarperfil" element={<EditarPerfil />} />
         <Route path="solicitarpermisos" element={<SolicitarPermisos />} />
         <Route path="solicitarvacaciones" element={<SolicitarVacaciones />} />
+        <Route path="vacaciones/:id" element={<Vacaciones />} />
+        <Route path="permisos/:id" element={<Permisos />} />
 
         
         

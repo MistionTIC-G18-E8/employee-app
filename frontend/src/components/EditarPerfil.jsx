@@ -22,9 +22,6 @@ const EditarPerfil = () => {
                                 <option id="ciudadania" value="cedulaDeCiudadania">Cédula de ciudadanía</option>
                                 <option id="extranjeria" value="cedulaDeExtranjeria">Cédula de extranjería</option>
                             </Form.Select>
-
-
-
                             <Form.Label>Número de documento</Form.Label>
                             <Form.Control type="number" placeholder="12345678" />
                         </Form.Group>
