@@ -1,0 +1,29 @@
+{
+  "name": "employee-app-backend",
+  "version": "1.0.0",
+  "description": "Employee management application",
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MistionTIC-G18-E8/employee-app.git"
+  },
+  "keywords": [
+    "backend",
+    "express",
+    "node"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MistionTIC-G18-E8/employee-app/issues"
+  },
+  "homepage": "https://github.com/MistionTIC-G18-E8/employee-app#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.14"
+  }
+}
