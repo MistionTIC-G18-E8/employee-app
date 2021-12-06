@@ -36,33 +36,20 @@ module.exports = (mongoose) => {
         enum : 'male'||'female',
         trim: true,
         required: true,
-        maxlength: 100
       },
       joined_at: {
         type: Date,
         default:Date.now,
         required: false,
-        maxlength: 100
       },
       left_at: {
         type: Date,
         default:Date.now,
         required: false,
-        maxlength: 100
       },
       contract: {
         type: ObjectId,
         required: true,
-      },
-      contract_start: {
-        type: Date,
-        default:Date.now,
-        required: true,
-      },
-      contract_end: {
-        type: Date,
-        default:Date.now,
-        required: false,
       },
       jobtitle: {
         type: String,
@@ -74,12 +61,6 @@ module.exports = (mongoose) => {
         type: String,
         default: '',
         required: false,
-        maxlength: 100
-      },
-      salary: {
-        type: Number,
-        default: '',
-        required: true,
         maxlength: 100
       },
     },
