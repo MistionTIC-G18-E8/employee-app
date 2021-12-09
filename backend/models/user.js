@@ -2,13 +2,6 @@ module.exports = (mongoose) => {
   const ObjectId = mongoose.Schema.Types.ObjectId;
   var schema = mongoose.Schema(
     {
-      username: {
-        type: String,
-        default: '',
-        trim: true,
-        required: true,
-        maxlength: 40,
-      },
       email: {
         type: String,
         default: '',
@@ -32,6 +25,7 @@ module.exports = (mongoose) => {
         trim: true,
         required: false,
       },
+      // TODO: Define the constants for permissions
       permission: {
         type: Number,
         default: 10,
@@ -40,6 +34,7 @@ module.exports = (mongoose) => {
     },
   );
 
+  // TODO: Method save needs overwritting to hash password
   schema.method("toJSON", function() {
     const { __v, _id, ...object } = this.toObject();
     object.id = _id;

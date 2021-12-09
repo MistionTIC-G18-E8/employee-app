@@ -9,7 +9,7 @@ db.employee = require("./employee.js")(mongoose);
 db.contract = require("./contract.js")(mongoose);
 db.payslip = require("./payslip.js")(mongoose);
 db.user = require("./user.js")(mongoose);
-db.employeeRequest = require("./employee_request.js")(mongoose);
+db.employee_request = require("./employee_request.js")(mongoose);
 db.url = dbConfig.url;
 console.log('The configured db url is ' + db.url);
 module.exports = db;

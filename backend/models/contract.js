@@ -14,7 +14,7 @@ module.exports = (mongoose) => {
       },
       employee: {
         type: ObjectId,
-        required: true,
+        required: false,
       },
       start: {
         type: Date,
@@ -25,6 +25,10 @@ module.exports = (mongoose) => {
         type: Date,
         default: Date.now,
         required: false,
+      },
+      active: {
+        type: Boolean,
+        default: true,
       },
     },
   );

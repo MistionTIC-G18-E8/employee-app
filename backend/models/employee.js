@@ -24,6 +24,13 @@ module.exports = (mongoose) => {
         required: true,
         maxlength: 100
       },
+      phone: {
+        type: String,
+        default: '',
+        trim: true,
+        required: true,
+        maxlength: 20
+      },
       address: {
         type: String,
         default: '',
@@ -33,7 +40,7 @@ module.exports = (mongoose) => {
       },
       gender: {
         type: String,
-        enum : 'male'||'female',
+        enum : ['male', 'female'],
         trim: true,
         required: true,
       },

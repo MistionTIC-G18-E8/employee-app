@@ -4,14 +4,14 @@ module.exports = (mongoose) => {
     {
       state: {
         type: String,
-        enum: 'approved' || 'denied' || 'pending',
+        enum: ['approved', 'denied', 'pending'],
         default: 'pending',
         trim: true,
         required: true,
       },
       type: {
         type: String,
-        enum: 'vacation' || 'timeoff',
+        enum: ['leave', 'vacation', 'timeoff', 'sick', 'other'],
         default: 'pending',
         trim: true,
         required: true,
@@ -25,18 +25,25 @@ module.exports = (mongoose) => {
         type: ObjectId,
         required: true,
       },
+      days: {
+        type: Number,
+        required: false,
+      },
+      start: {
+        type: Date,
+        required: true,
+      },
+      end: {
+        type: Date,
+        required: true,
+      },
       employee: {
         type: ObjectId,
         required: true,
       },
       approved_by: {
         type: ObjectId,
-        required: true,
-      },
-      date: {
-        type: Date,
-        default: Date.now,
-        required: true,
+        required: false,
       },
     },
   );
