@@ -12,11 +12,6 @@ module.exports = (mongoose) => {
         default: 0,
         required: true,
       },
-      days_not: {
-        type: Number,
-        default: 0,
-        required: true,
-      },
       contract: {
         type: ObjectId,
         required: true,
