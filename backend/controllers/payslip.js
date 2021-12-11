@@ -1,4 +1,5 @@
 const db = require("../models/index.js");
+
 const Payslip = db.payslip;
 
 // Create and Save a new Payslip
@@ -30,8 +31,7 @@ exports.create = (req, res) => {
 
 // Retrieve all payslips from the database.
 exports.findAll = (req, res) => {
-  const title = req.query.title;
-  var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
+  let condition = {};
 
   Payslip.find(condition)
     .then(data => {

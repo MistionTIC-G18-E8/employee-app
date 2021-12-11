@@ -9,9 +9,10 @@ const Payslip = db.payslip;
 const EmployeeRequest = db.employee_request;
 const ObjectId = db.mongoose.Types.ObjectId;
 
-let genders = ['male', 'female'];
-let requests_type = ['leave', 'vacation', 'timeoff', 'sick', 'other'];
-let requests_state = ['approved', 'denied', 'pending']
+const genders = ['male', 'female'];
+const requests_type = ['leave', 'vacation', 'timeoff', 'sick', 'other'];
+const requests_state = ['approved', 'denied', 'pending']
+const emails = {}
 
 module.exports = async () => {
   // Drop all data first
@@ -54,14 +55,19 @@ module.exports = async () => {
       jobtitle: faker.name.jobTitle(),
       department: faker.commerce.department(),
     };
-    employee.email = faker.internet.email(employee.first_name, employee.last_name, "facebook.com");
+    // Make sure the email is unique
+    let email = faker.internet.email(employee.first_name, employee.last_name);
+    while (emails[email]) {
+      email = faker.internet.email(employee.first_name, employee.last_name);
+    }
+    employee.email = email;
+    emails[email] = true;
 
-    // TODO: Password salting and hashing
     let user = {
       _id: ObjectId(),
       email: employee.email,
       employee: employee._id,
-      password: faker.internet.password(),
+      password: "test",
       permission: permission,
     }
 
@@ -105,7 +111,14 @@ module.exports = async () => {
   };
   // Save all the objects
   for (let key in tosave) {
-    db[key].insertMany(tosave[key]);
+    // User documents need saving to get the hashed password
+    if (key == "user") {
+      for (let i = 0; i < tosave[key].length; i++) {
+        tosave[key][i].save();
+      }
+    } else {
+      db[key].insertMany(tosave[key]);
+    }
   }
   console.log("Database initialzed");
 }

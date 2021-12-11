@@ -1,0 +1,44 @@
+version: "3.2"
+services:
+  # In development the front-end is proxied, since node is serving it with the
+  # development server.
+  nginx:
+    ports:
+      - "8000:80"
+    volumes:
+      - ./nginx/frontend_dev.conf:/etc/nginx/conf.d/frontend.conf
+
+  # Expose the ports to be able to communicate without nginx if debugging is
+  # needed.
+  api:
+    image: eapp-api:1.0-dev
+    build:
+      target: base
+    ports:
+      - 8001:8080
+    volumes:
+      # Mounting everything including node_modules
+      - ./backend/:/usr/src/app
+    stop_signal: SIGTERM
+
+  # The frontend is served by the react development server, instead of serving
+  # the built files from the webserver
+  frontend:
+    container_name: frontend
+    image: eapp-front:1.0-dev
+    build:
+      target: base
+    environment:
+      - CHOKIDAR_USEPOLLING=${CHOKIDAR_USEPOLLING}
+    volumes:
+      # Mounting everything including node_modules
+      - ./frontend/:/usr/src/app
+    ports:
+      # Bind the port to be able to communicate without nginx if debugging is
+      # needed
+      - "8002:3000"
+
+  # Bind the port to access locally.
+  mongo-express:
+    ports:
+      - 8081:8081

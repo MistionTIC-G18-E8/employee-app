@@ -1,0 +1,33 @@
+version: "3.2"
+services:
+
+  # TODO: Traefik container handling https
+  # Needs the volume with the frontend files mounted
+  nginx:
+    ports:
+      - 8000:80
+    volumes:
+      - ./nginx/frontend_prod.conf:/etc/nginx/conf.d/frontend.conf
+      - frontend_build:/var/www/html
+
+  api:
+    image: eapp-api:1.0
+    build:
+      target: production
+    environment:
+      - "NODE_ENV=production"
+
+  # Should build the files into a volume, and exit.
+  frontend:
+    image: eapp-front:1.0
+    container_name: frontend
+    restart: on-failure
+    build:
+      target: production
+    volumes:
+      # Mounting everything including node_modules
+      - frontend_build:/usr/src/app/build
+
+volumes:
+  frontend_build:
+
