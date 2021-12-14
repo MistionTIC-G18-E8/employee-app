@@ -14,9 +14,9 @@ export default function NavBar() {
             <Nav className="ms-auto">
 
             
-              <LinkContainer to="/login">
+              {/* <LinkContainer to="/login">
                 <Nav.Link>Login</Nav.Link>
-              </LinkContainer>
+              </LinkContainer> */}
               <LinkContainer to="/editarperfil">
                 <Nav.Link>Editar Perfil</Nav.Link>
               </LinkContainer>    
