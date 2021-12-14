@@ -1,3 +1,4 @@
+const middlewares = require("../middlewares");
 module.exports = app => {
 
   const controller = require("../controllers/contract");

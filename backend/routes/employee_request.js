@@ -1,7 +1,9 @@
+const middlewares = require("../middlewares");
 module.exports = app => {
 
   const controller = require("../controllers/employee_request");
   var router = require("express").Router();
+  router.use(middlewares.auth);
 
   // Create a new employee_request
   router.post("/", controller.create);

@@ -1,7 +1,9 @@
 module.exports = app => {
 
+  const middlewares = require("../middlewares");
   const controller = require("../controllers/payslip");
   var router = require("express").Router();
+  router.use(middlewares.auth);
 
   // Create a new payslip
   router.post("/", controller.create);

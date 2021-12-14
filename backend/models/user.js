@@ -1,5 +1,5 @@
 bcrypt = require('bcrypt'),
-SALT_WORK_FACTOR = 10;
+  SALT_WORK_FACTOR = 10;
 
 module.exports = (mongoose) => {
   const ObjectId = mongoose.Schema.Types.ObjectId;
@@ -56,13 +56,10 @@ module.exports = (mongoose) => {
   });
 
   schema.methods.comparePassword = function(candidatePassword, cb) {
-    bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
-      if (err) return cb(err);
-      cb(null, isMatch);
-    });
+    bcrypt.compare(candidatePassword, this.password, cb);
   };
 
-  schema.methods.updatePassword = async function(newPassword, cb) {
+  schema.methods.updatePassword = function(newPassword, cb) {
     var user = this;
     user.password = newPassword;
     user.save().then(() => {
