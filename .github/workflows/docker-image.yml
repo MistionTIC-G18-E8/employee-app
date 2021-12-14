@@ -1,0 +1,18 @@
+name: Docker Images CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the API Docker Image
+      run: cd backend/ && docker build . --file Dockerfile --tag eapp-api:$(date +%s) --tag eapp-api:latest --tag eapp-api:1.0
+    - name: Build the Frontend Docker Image
+      run: cd frontend/ && docker build . --file Dockerfile --tag eapp-front:$(date +%s) --tag eapp-front:latest --tag eapp-front:1.0
