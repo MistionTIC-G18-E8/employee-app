@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Col, Row } from "react-bootstrap";
 import PropTypes from 'prop-types';
+import API from '../api'
 
 async function loginUser(credentials) {
-  return fetch('https://mtic.muniter.xyz/api/user/login', {
+  return fetch(API + 'user/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
