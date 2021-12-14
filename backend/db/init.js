@@ -9,6 +9,32 @@ const Payslip = db.payslip;
 const EmployeeRequest = db.employee_request;
 const ObjectId = db.mongoose.Types.ObjectId;
 
+const preuser = [
+  {
+    first_name: "Camilo",
+    last_name: "Chavez",
+    email: "camilo@email.com",
+    permission: 1,
+  },
+  {
+    first_name: "Erik",
+    last_name: "Torres",
+    email: "erik@email.com",
+    permission: 1,
+  },
+  {
+    first_name: "Raul",
+    last_name: "López",
+    email: "raul@email.com",
+    permission: 1,
+  },
+  {
+    first_name: "Javier",
+    last_name: "López",
+    email: "javier@email.com",
+    permission: 1,
+  },
+]
 const genders = ['male', 'female'];
 const requests_type = ['leave', 'vacation', 'timeoff', 'sick', 'other'];
 const requests_state = ['approved', 'denied', 'pending']
@@ -63,11 +89,15 @@ module.exports = async () => {
     employee.email = email;
     emails[email] = true;
 
+    // Merge predefined users when there's still some
+    let override_user = preuser.pop() || {};
+    employee = Object.assign(employee, override_user);
+
     let user = {
       _id: ObjectId(),
       email: employee.email,
       employee: employee._id,
-      password: "test",
+      password: "password",
       permission: permission,
     }
 
