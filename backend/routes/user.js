@@ -1,8 +1,8 @@
 module.exports = app => {
 
   const controller = require("../controllers/user");
-  var router = require("express").Router();
   const db = require("../models/index.js");
+  const middlewares = require("../middlewares");
   const User = db.user;
   const jwt = require("jsonwebtoken");
   const SECRET_KEY = require('../config/config').SECRET_KEY;
@@ -64,6 +64,9 @@ module.exports = app => {
     });
   });
 
+  // Auth middleware set after /login
+  router.use(middlewares.auth);
+
   // Create a new user
   router.post("/", controller.create);
 
@@ -82,5 +85,6 @@ module.exports = app => {
   // Delete all user
   router.delete("/", controller.deleteAll);
 
+  // Register all routes
   app.use("/api/user", router);
-};
+}
