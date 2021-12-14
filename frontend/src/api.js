@@ -1,7 +1,7 @@
 let API = '';
 switch (process.env.NODE_ENV) {
   case 'production':
-    API = window.location.origin + '/api';
+    API = window.location.origin + '/api/';
     break;
   default:
     API = 'https://mtic.muniter.xyz/api/'
