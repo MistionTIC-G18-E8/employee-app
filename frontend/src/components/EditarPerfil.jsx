@@ -24,7 +24,7 @@ const EditarPerfil = () => {
 
     const enviarDatos = (event) => {
         event.preventDefault()
-        console.log('enviando datos...' + datos.nombresPerfil + ' ' + datos.apellidosPerfil + ' ' + datos.telefonoPerfil + ' ' + datos.tipoDocumentoPerfil + ' ' + datos.numeroDocumento)
+        console.log('enviando datos...' + datos.nombresPerfil + ' ' + datos.apellidosPerfil + ' ' + datos.telefonoPerfil + ' ' + datos.numeroDocumento)
 
     
     }
