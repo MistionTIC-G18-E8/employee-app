@@ -1,4 +1,4 @@
-version: "3.2"
+version: "3.5"
 services:
   # In development the front-end is proxied, since node is serving it with the
   # development server.
