@@ -11,10 +11,21 @@ import SolicitarPermisos from "./routes/SolicitarPermisos"
 import SolicitarVacaciones from "./routes/SolicitarVacaciones"
 import Vacaciones from "./routes/Vacaciones"
 import Permisos from "./routes/Permisos"
+import LoginForm from "./components/LoginForm";
+import useToken from './useToken';
+
 
 
 
 export default function App() {
+
+  const { token, setToken } = useToken();
+
+
+if(!token) {
+  return <LoginForm setToken={setToken} />
+}
+
   return (
     <>
       <NavBar />
