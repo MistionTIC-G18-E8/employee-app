@@ -44,6 +44,8 @@ const EditarPerfil = () => {
 
   return (
     <Container>
+      <div style={{ height: '60px' }}></div>
+
       <Row className="m-4 justify-content-center display-6">Editar Perfil</Row>
       {/* <pre>Datos: {JSON.stringify(datos, null, 2)}</pre> */}
       <Row className="justify-content-center">

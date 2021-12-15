@@ -26,7 +26,7 @@ var permission = parseInt(datos?.permission)
 
   return (
     <>
-      <Navbar collapseOnSelect expand="false" bg="primary" variant="dark">
+      <Navbar collapseOnSelect expand="false" bg="primary" variant="dark" fixed="top">
         <Container>
           <LinkContainer to="/">
             <Navbar.Brand><strong>Facebook</strong> Payroll App</Navbar.Brand>

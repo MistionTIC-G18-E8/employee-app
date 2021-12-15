@@ -4,6 +4,8 @@ import { Form, Button, Container, Col, Row } from "react-bootstrap";
 const Vacaciones = () => {
     return (
         <Container>
+                <div style={{height:'60px'}}></div>
+
             <Row className="m-4 justify-content-center display-6">
                 Vacaciones
             </Row>
