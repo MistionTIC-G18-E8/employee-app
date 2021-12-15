@@ -1,6 +1,6 @@
 # Employee App
 
-Proyecto para MisionTIC, back-end node with express.js, front-end rect.
+Proyecto para MisionTIC, back-end node with express.js, front-end React.
 
 Integrantes:
     - Camilo Alfonso Chaves Hernández  
