@@ -1,7 +1,5 @@
 import { Navbar, Container, Nav } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
-
-
 import { LinkContainer } from "react-router-bootstrap";
 import API from "../api";
 
