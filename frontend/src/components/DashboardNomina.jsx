@@ -93,7 +93,10 @@ const DashboardNomina = () => {
                 </thead>
                 <tbody>
                     {datos?.map((elemento) =>(
-                        <tr>
+                        <tr onClick={() => {
+                                handleShow(); 
+                                getUserData(elemento.id);
+                            }}>
                             <td>{elemento.first_name}</td>
                             <td>{elemento.last_name}</td>
                             <td>{elemento.email}</td>
@@ -101,10 +104,10 @@ const DashboardNomina = () => {
                             <td>{elemento.address}</td>
                             <td>{elemento.department}</td>
                             <td>{elemento.joined_at}</td>
-                            <td><Button variant="primary" onClick={() => {
+                            {/* <td><Button variant="primary" onClick={() => {
                                 handleShow(); 
                                 getUserData(elemento.id);
-                            }}>Editar</Button></td>
+                            }}>Editar</Button></td> */}
                         </tr>
                     ))}
                 </tbody>
