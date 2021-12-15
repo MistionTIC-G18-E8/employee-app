@@ -1,54 +1,168 @@
-import React from 'react'
-import { Form, Button, Table } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Form, Button, Table, Container, Modal, ModalBody, ModalFooter, FormGroup } from "react-bootstrap";
+import ModalHeader from "react-bootstrap/esm/ModalHeader";
+import API from "../api";
 
 const DashboardNomina = () => {
+    const[datos, setDatos] = useState();
+    const[datosUsuario, setDatosUsuario] = useState();
+
+    const token = sessionStorage.getItem("token");
+    const parsedToken = JSON.parse(token);
+    
+    let selectedUser = undefined;
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    useEffect(() => {
+        fetch(API + "employee/", {
+          headers: {
+            authorization: `Bearer ${parsedToken.token}`,
+            },
+        })
+          .then((response) => response.json())
+          .then((data) => setDatos(data));
+    }, []);
+
+    const getUserData = (id) => {
+        fetch(API + "employee/" + id, {
+            headers: {
+                authorization: `Bearer ${parsedToken.token}`,
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => setDatosUsuario(data));
+    }
+
+
+    const handleInputChange = (event) => {
+        setDatosUsuario({
+          ...datosUsuario,
+          [event.target.name]: event.target.value,
+        });
+    };
+
+    const updateUsuario = async (e) => {
+        e.preventDefault();
+        console.log("datos", JSON.stringify(datosUsuario));
+        const response = await fetch(API + "employee/" + datosUsuario.id, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${parsedToken.token}`,
+          },
+          body: JSON.stringify(datosUsuario),
+        });
+        const data = await response.json();
+        alert(JSON.stringify(data));
+        //
+        return window.location.reload();
+    };
+
+    const deleteUsuario = async (e) => {
+        if(selectedUser){
+            const response = await fetch(API + "employee/" + selectedUser, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${parsedToken.token}`,
+                },
+            });
+            const data = await response.json();
+            alert(JSON.stringify(data));
+            return window.location.reload();
+        }
+    };
+
     return (
-        <Table striped bordered hover size="sm">
-            <thead>
-                <tr>
-                    <th>C.C</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Usuario</th>
-                    <th>Fecha Ingreso</th>
-                    <th>Salario</th>
-                    <th>Vacaciones</th>
-                    <th>Permisos</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th><Form.Control type="number" placeholder="123" id="cedulaUsuario" required/></th>
-                    <th><Form.Control type="text" placeholder="John" id="nombreUsuario" required/></th>
-                    <th><Form.Control type="text" placeholder="Cena" id="apellidoUsuario" required/></th>
-                    <th><Form.Control type="text" placeholder="GOAT" id="usuario" required/></th>
-                    <th><Form.Control type="date" id="fechaUsuario" required/></th>
-                    <th><Form.Control type="number" placeholder="235" id="salarioUsuario" required/></th>
-                    <th><Button variant="primary" type="submit" href="/crearUsuario">Crear Usuario</Button></th>
-                    <th></th>
-                </tr>     
-                <tr>
-                    <th>1</th>
-                    <th>Raul</th>
-                    <th>Lopez</th>
-                    <th>rlopez</th>
-                    <th>14/06/20</th>
-                    <th>100000000</th>
-                    <th><Button variant="primary" type="submit" href="/vacaciones/1">Ver Vacaciones</Button></th>
-                    <th><Button variant="primary" type="submit" href="/permisos/1">Ver Permisos</Button></th>
-                </tr>
-                <tr>
-                    <th>2</th>
-                    <th>Javier</th>
-                    <th>Lopez</th>
-                    <th>jlopez</th>
-                    <th>20/06/20</th>
-                    <th>200000000</th>
-                    <th><Button variant="primary" type="submit" href="/vacaciones/2">Ver Vacaciones</Button></th>
-                    <th><Button variant="primary" type="submit" href="/permisos/2">Ver Permisos</Button></th>
-                </tr>
-            </tbody>
-        </Table>
+        <>
+        <Container>
+            <Table striped bordered hover size="sm">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Email</th>
+                        <th>Telefono</th>
+                        <th>Direccion</th>
+                        <th>Departamento</th>
+                        <th>Fecha Ingreso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {datos?.map((elemento) =>(
+                        <tr>
+                            <td>{elemento.first_name}</td>
+                            <td>{elemento.last_name}</td>
+                            <td>{elemento.email}</td>
+                            <td>{elemento.phone}</td>
+                            <td>{elemento.address}</td>
+                            <td>{elemento.department}</td>
+                            <td>{elemento.joined_at}</td>
+                            <td><Button variant="primary" onClick={() => {
+                                handleShow(); 
+                                getUserData(elemento.id);
+                            }}>
+                            Editar
+                            </Button></td>
+                            <td><Button variant="danger" onClick={() => {
+                                selectedUser = elemento.id;
+                                deleteUsuario();
+                            }}>
+                            Eliminar
+                            </Button></td>
+                        </tr>
+                    ))}
+                </tbody>
+            </Table>
+        </Container>
+
+        <Modal show={show} onHide={handleClose}>
+            <ModalHeader closeButton>
+                <div>
+                    <h3>Editar Empleado</h3>
+                </div>
+            </ModalHeader>
+            <Form onSubmit={updateUsuario}>
+                <ModalBody>
+                    
+                        <FormGroup>
+                            <Form.Label>id</Form.Label>
+                            <Form.Control name="id" type="text" readOnly value={datosUsuario?.id} onChange={handleInputChange}/>
+
+                            <Form.Label>Nombre</Form.Label>
+                            <Form.Control name="first_name" type="text" placeholder={datosUsuario?.first_name} onChange={handleInputChange}/>
+                            
+                            <Form.Label>Apellido</Form.Label>
+                            <Form.Control name="last_name" type="text" placeholder={datosUsuario?.last_name} onChange={handleInputChange}/>
+
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control name="email" type="text" placeholder={datosUsuario?.email} onChange={handleInputChange}/>
+
+                            <Form.Label>Telefono</Form.Label>
+                            <Form.Control name="phone" type="text" placeholder={datosUsuario?.phone} onChange={handleInputChange}/>
+
+                            <Form.Label>Direccion</Form.Label>
+                            <Form.Control name="address" type="text" placeholder={datosUsuario?.address} onChange={handleInputChange}/>
+
+                            <Form.Label>Departamento</Form.Label>
+                            <Form.Control name="department" type="text" placeholder={datosUsuario?.department} onChange={handleInputChange}/>
+
+                            <Form.Label>Fecha Ingreso</Form.Label>
+                            <Form.Control name="joined_at" type="text" placeholder={datosUsuario?.joined_at} onChange={handleInputChange}/>
+
+                        </FormGroup>
+                    
+                </ModalBody>
+
+                <ModalFooter>
+                    <Button variant="primary" type="submit">Guardar Cambios</Button>
+                </ModalFooter>
+            </Form>
+        </Modal>
+        </>
     )
 }
 
