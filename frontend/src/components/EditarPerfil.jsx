@@ -45,7 +45,7 @@ const EditarPerfil = () => {
   return (
     <Container>
       <Row className="m-4 justify-content-center display-6">Editar Perfil</Row>
-      <pre>Datos: {JSON.stringify(datos, null, 2)}</pre>
+      {/* <pre>Datos: {JSON.stringify(datos, null, 2)}</pre> */}
       <Row className="justify-content-center">
         <Col xs="auto" lg="4">
           <Form onSubmit={enviarDatos}>
@@ -78,13 +78,22 @@ const EditarPerfil = () => {
                 onChange={handleInputChange}
                 name="phone"
               />
-              <Form.Label>Address</Form.Label>
+              <Form.Label>Dirección</Form.Label>
               <Form.Control
                 type="text"
                 placeholder={datos?.address}
                 onChange={handleInputChange}
                 name="address"
               />
+              <Form.Label>Género</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder={datos?.gender}
+                onChange={handleInputChange}
+                name="gender"
+              />
+
+
             </Form.Group>
             <div className="text-center">
               <Button variant="primary" type="submit">
