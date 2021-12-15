@@ -20,7 +20,7 @@ export default function NavBar() {
     })
       .then((response) => response.json())
       .then((data) => setDatos(data));
-  }, []);
+  }, [parsedToken.token, parsedToken.user]);
 
 var permission = parseInt(datos?.permission)
 

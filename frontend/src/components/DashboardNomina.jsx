@@ -9,8 +9,6 @@ const DashboardNomina = () => {
 
     const token = sessionStorage.getItem("token");
     const parsedToken = JSON.parse(token);
-    
-    let selectedUser = undefined;
 
     const [show, setShow] = useState(false);
 
@@ -25,7 +23,7 @@ const DashboardNomina = () => {
         })
           .then((response) => response.json())
           .then((data) => setDatos(data));
-    }, []);
+    }, [parsedToken.token]);
 
     const getUserData = (id) => {
         fetch(API + "employee/" + id, {
@@ -63,8 +61,9 @@ const DashboardNomina = () => {
     };
 
     const deleteUsuario = async (e) => {
-        if(selectedUser){
-            const response = await fetch(API + "employee/" + selectedUser, {
+        console.log("datos", JSON.stringify(datosUsuario));
+        if(datosUsuario.id){
+            const response = await fetch(API + "employee/" + datosUsuario.id, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${parsedToken.token}`,
@@ -104,15 +103,7 @@ const DashboardNomina = () => {
                             <td><Button variant="primary" onClick={() => {
                                 handleShow(); 
                                 getUserData(elemento.id);
-                            }}>
-                            Editar
-                            </Button></td>
-                            <td><Button variant="danger" onClick={() => {
-                                selectedUser = elemento.id;
-                                deleteUsuario();
-                            }}>
-                            Eliminar
-                            </Button></td>
+                            }}>Editar</Button></td>
                         </tr>
                     ))}
                 </tbody>
@@ -125,7 +116,7 @@ const DashboardNomina = () => {
                     <h3>Editar Empleado</h3>
                 </div>
             </ModalHeader>
-            <Form onSubmit={updateUsuario}>
+            <Form>
                 <ModalBody>
                     
                         <FormGroup>
@@ -158,7 +149,8 @@ const DashboardNomina = () => {
                 </ModalBody>
 
                 <ModalFooter>
-                    <Button variant="primary" type="submit">Guardar Cambios</Button>
+                    <Button variant="primary" onClick={updateUsuario}>Guardar Cambios</Button>
+                    <Button variant="danger" onClick={deleteUsuario}>Eliminar</Button>
                 </ModalFooter>
             </Form>
         </Modal>

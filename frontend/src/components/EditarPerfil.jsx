@@ -16,7 +16,7 @@ const EditarPerfil = () => {
     })
       .then((response) => response.json())
       .then((data) => setDatos(data));
-  }, []);
+  }, [parsedToken.token, parsedToken.employee]);
 
   const handleInputChange = (event) => {
     setDatos({
