@@ -78,6 +78,7 @@ const DashboardNomina = () => {
     return (
         <>
         <Container>
+        <div style={{height:'60px'}}></div>
             <Table striped bordered hover size="sm">
                 <thead>
                     <tr>

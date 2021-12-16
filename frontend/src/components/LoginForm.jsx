@@ -26,6 +26,12 @@ export default function LoginForm ({setToken}) {
       password
     });
     setToken(token);
+    // mostrar mensaje de error si no se puede loguear 
+    let tokenNow = (sessionStorage.getItem("token"));
+    let parsedTokenNow =  JSON.parse(tokenNow)
+    if( parsedTokenNow.success === false){
+      alert(parsedTokenNow.message)
+    }
   }  
 
   return (
