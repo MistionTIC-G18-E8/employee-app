@@ -30,6 +30,7 @@ services:
       target: base
     environment:
       - CHOKIDAR_USEPOLLING=${CHOKIDAR_USEPOLLING}
+      - NODE_ENV=${NODE_ENV}
     volumes:
       # Mounting everything including node_modules
       - ./frontend/:/usr/src/app

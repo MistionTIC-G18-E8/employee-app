@@ -26,6 +26,7 @@ services:
       target: production
     volumes:
       # Mounting everything including node_modules
+      - "NODE_ENV=production"
       - frontend_build:/usr/src/app/build
 
 volumes:
