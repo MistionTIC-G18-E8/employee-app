@@ -56,7 +56,7 @@ module.exports = (mongoose) => {
       },
       contract: {
         type: ObjectId,
-        required: true,
+        required: false,
       },
       jobtitle: {
         type: String,
