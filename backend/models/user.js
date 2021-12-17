@@ -15,7 +15,7 @@ module.exports = (mongoose) => {
       },
       employee: {
         type: ObjectId,
-        required: true,
+        required: false,
         unique: true
       },
       password: {
