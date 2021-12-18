@@ -12,6 +12,7 @@ const DashboardNomina = () => {
     const[telefonoEmpleado, setTelefonoEmpleado] = useState();
     const[direccionEmpleado, setDireccionEmpleado] = useState();
     const[departamentoEmpleado, setDepartamentoEmpleado] = useState();
+    const[generoEmpleado, setGeneroEmpleado] = useState();
 
 
     const token = sessionStorage.getItem("token");
@@ -90,7 +91,8 @@ const DashboardNomina = () => {
             email: emailEmpleado,
             phone: telefonoEmpleado,
             address: direccionEmpleado,
-            department: departamentoEmpleado
+            department: departamentoEmpleado,
+            gender: generoEmpleado
         }
         const response = await fetch(API + "employee/", {
             method: "POST",
@@ -121,6 +123,7 @@ const DashboardNomina = () => {
                                 <th>Telefono</th>
                                 <th>Direccion</th>
                                 <th>Departamento</th>
+                                <th>Genero</th>
                                 <th>Fecha Ingreso</th>
                             </tr>
                         </thead>
@@ -153,6 +156,10 @@ const DashboardNomina = () => {
                                 </td>
 
                                 <td>
+                                <Form.Control name="gender" type="text" value={generoEmpleado} placeholder="male" onChange={(e)=>{setGeneroEmpleado(e.target.value)}} required/>
+                                </td>
+
+                                <td>
                                 <Button variant="success" type="submit">Ingresar</Button>
                                 <Form.Control name="joined_at" type="text"  style={{display:"none"}} />
 
@@ -169,6 +176,7 @@ const DashboardNomina = () => {
                                     <td>{elemento.phone}</td>
                                     <td>{elemento.address}</td>
                                     <td>{elemento.department}</td>
+                                    <td>{elemento.gender}</td>
                                     <td>{ new Date (elemento.joined_at).toLocaleDateString("en-GB")}</td>
                                     {/* <td><Button variant="primary" onClick={() => {
                                         handleShow();
