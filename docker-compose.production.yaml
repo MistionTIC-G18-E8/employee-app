@@ -24,9 +24,10 @@ services:
     restart: on-failure
     build:
       target: production
+    environment:
+      - "NODE_ENV=production"
     volumes:
       # Mounting everything including node_modules
-      - "NODE_ENV=production"
       - frontend_build:/usr/src/app/build
 
 volumes:
