@@ -65,7 +65,7 @@ exports.login = async (req, res, _) => {
 exports.create = (req, res) => {
   // Validate request
   console.log('received create request');
-  if (!req.body.title) {
+  if (!req.body) {
     res.status(400).send({ message: "Content can not be empty!" });
     return;
   }

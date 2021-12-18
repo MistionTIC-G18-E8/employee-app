@@ -7,3 +7,5 @@ packages/*/dist
 coverage
 cypress/screenshots
 cypress/videoso
+
+build/
