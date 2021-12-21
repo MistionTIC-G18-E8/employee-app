@@ -1,7 +1,43 @@
 version: "3.5"
 services:
+  traefik:
+    container_name: traefik
+    image: "traefik:v2.5"
+    restart: unless-stopped
+    environment:
+      - CF_DNS_API_TOKEN=${CLOUDFLARE_DNS_API_TOKEN}
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - web
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./letsencrypt:/letsencrypt
+    command:
+      - "--log.level=INFO"
+      - "--accesslog=true"
+      - "--providers.docker=true"
+      - "--providers.docker.network=web"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.le.acme.email=${LETSENCRYPT_EMAIL}"
+      - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.le.acme.dnschallenge=true"
+      - "--certificatesresolvers.le.acme.dnschallenge.provider=cloudflare"
+      # For statging certificates e.g testing
+      # - "--certificatesresolvers.le.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+    labels:
+      # enable traefik
+      - "traefik.enable=true"
+      # global redirect to https
+      - "traefik.http.routers.http-catchall.rule=hostregexp(`{host:.+}`)"
+      - "traefik.http.routers.http-catchall.entrypoints=web"
+      - "traefik.http.routers.http-catchall.middlewares=redirect-to-https"
+      # middleware redirect for production only
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
 
-  # TODO: Traefik container handling https
   # Needs the volume with the frontend files mounted
   nginx:
     ports:
@@ -9,6 +45,14 @@ services:
     volumes:
       - ./nginx/frontend_prod.conf:/etc/nginx/conf.d/frontend.conf
       - frontend_build:/var/www/html
+    labels:
+      - "traefik.enable=true"
+      # Web Client
+      - "traefik.http.services.nginx.loadbalancer.server.port=80"
+      - "traefik.http.routers.nginx.service=nginx"
+      - "traefik.http.routers.nginx.entrypoints=websecure"
+      - "traefik.http.routers.nginx.rule=Host(`${SITE}`)"
+      - "traefik.http.routers.nginx.tls.certresolver=le"
 
   api:
     image: eapp-api:1.0
@@ -32,4 +76,3 @@ services:
 
 volumes:
   frontend_build:
-
